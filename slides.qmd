@@ -15,6 +15,8 @@ include-before-body:
   - _progressbar.html
 ---
 
+#
+
 ## Shiny is easy...
 
 ## ...until it's not
@@ -126,22 +128,22 @@ wasm doesn't change these limitations, it just makes them hurt more.
 
 ::: incremental
 - [Alon Zakai](https://www.linkedin.com/in/alonzakai/): "Let's build a compiler toolchain and computing platform that runs on wasm" → emscripten
-- [Michael Droettboom](https://www.linkedin.com/in/mdboom/): "Let's patch NumPy, Matplotlib, and Pandas to run on wasm" → Pyodide
-- [George Stagg](https://www.linkedin.com/in/george-w-stagg/) and [Lionel Henry](https://twitter.com/_lionelhenry): "Let's patch R and build a `<canvas>` graphics device to run on wasm" → WebR
-- [Winston Chang](https://www.linkedin.com/in/winstonchang1/): "Let's make Shiny run on wasm" → ShinyLive
+- [Michael Droettboom](https://www.linkedin.com/in/mdboom/): "Let's patch NumPy, Matplotlib, and Pandas to run on emscripten" → Pyodide
+- [Winston Chang](https://www.linkedin.com/in/winstonchang1/): "Let's make Shiny run on Pyodide" → Shinylive
+- [George Stagg](https://www.linkedin.com/in/george-w-stagg/) and [Lionel Henry](https://twitter.com/_lionelhenry): "Let's patch R and build a `<canvas>` graphics device to run on emscripten" → WebR
 :::
 
 ## July 2022: Shinylive for Python
 
-![](images/shinylive-shiny-deployment-model.png){width=60%}
+![](images/shinylive-shiny-deployment-model.png){width=60% alt="Traditional Shiny deployment: Python runs on the server, not in the browser"}
 
-![](images/shinylive-shinylive-deployment-model.png){width=60%}
+![](images/shinylive-shinylive-deployment-model.png){width=60% alt="Shinylive deployment: Python runs in the browser, not on the server"}
 
 ## **Sept 2023:** Shinylive for R!!! {.confetti}
 
-![](images/shinylive-shiny-deployment-model-r.png){width=60%}
+![](images/shinylive-shiny-deployment-model-r.png){width=60% alt="Traditional Shiny deployment: R runs on the server, not in the browser"}
 
-![](images/shinylive-shinylive-deployment-model-r.png){width=60%}
+![](images/shinylive-shinylive-deployment-model-r.png){width=60% alt="Shinylive deployment: R runs in the browser, not on the server"}
 
 # How to use Shinylive
 
@@ -157,8 +159,13 @@ wasm doesn't change these limitations, it just makes them hurt more.
 
 {shinylive}: Convert local Shiny app to static HTML/CSS/JS/wasm
 
-(TODO: Diagram: app.R -> `> shinylive::export()` -> index.html + assets)
-(TODO: Diagram: app.py -> `$ shinylive export` -> index.html + assets)
+![](images/convert/‎convert.‎001.png){alt="app.R -&gt; shinylive::export() -&gt; index.html &amp; assets"}
+
+## Option 1: Convert
+
+{shinylive}: Convert local Shiny app to static HTML/CSS/JS/wasm
+
+![](images/convert/‎convert.‎002.png){alt="app.py -&gt; shinylive export -&gt; index.html &amp; assets"}
 
 ## Option 1: Convert
 
@@ -185,12 +192,7 @@ $ python -m http.server 8000
 
 Shinylive.io: Write and share Shiny apps directly in the browser
 
-1. Browse examples
-2. Create your own
-3. Share via URL
-4. Save to GitHub gist
-
-## Option 2: Fiddle
+. . .
 
 :::: columns
 ::: {.column width="75%"}
@@ -205,6 +207,61 @@ Shinylive.io: Write and share Shiny apps directly in the browser
 :::
 ::::
 
+## Option 2: Fiddle
+
+Shinylive.io: Write and share Shiny apps directly in the browser
+
+1. View and run examples
+2. Create your own apps
+3. Share via URL
+4. Save to GitHub gist
+
+## Option 3: Include
+
+[Shinylive Quarto extension](https://github.com/quarto-ext/shinylive): Static Shiny apps as Quarto code chunks
+
+. . .
+
+````
+```{shinylive-r}
+#| standalone: true
+
+ui <- fluidPage(
+  actionButton("btn", "Click me"),
+  plotOutput("plot")
+)
+
+server <- function(input, output, session) {
+  output$plot <- renderPlot({
+    input$btn
+    hist(rnorm(50))
+  })
+}
+
+shinyApp(ui, server)
+```
+````
+
+## Option 3: Include
+
+[Shinylive Quarto extension](https://github.com/quarto-ext/shinylive): Static Shiny apps as Quarto code chunks
+
+```{shinylive-r}
+#| standalone: true
+ui <- fluidPage(
+  actionButton("btn", "Click me"),
+  plotOutput("plot")
+)
+
+server <- function(input, output, session) {
+  output$plot <- renderPlot({
+    input$btn
+    hist(rnorm(50))
+  })
+}
+
+shinyApp(ui, server)
+```
 
 # Not just cheaper
 
@@ -257,10 +314,6 @@ AirTag on keychain
 ::: attribution
 Photo credit: <a href="https://unsplash.com/@eddiepipocas?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Eddie Pipocas</a> on <a href="https://unsplash.com/photos/wxQavhHf4J4?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 :::
-
-## Option 3: Include
-
-quarto-shinylive: Static Shiny apps as Quarto code chunks
 
 ## New uses for Shiny
 

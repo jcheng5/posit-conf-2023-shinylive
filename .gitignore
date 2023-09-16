@@ -1,1 +1,7 @@
 /.luarc.json
+/.Rproj.user/
+.Rhistory
+.Rprofile
+/.quarto/
+/slides_files/
+.DS_Store
