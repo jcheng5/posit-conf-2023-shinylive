@@ -1,0 +1,366 @@
+---
+title: "Running Shiny without a server"
+author: "Joe Cheng"
+title-slide-attributes: 
+  data-background-color: white
+  data-background-image: _extensions/jthomasmock/positslides/assets/backgrounds/sample-title-slide-option-1.png
+  data-background-size: contain
+format:
+  positslides-revealjs: 
+    width: "1600"
+    height: "900"
+filters:
+  - shinylive
+include-before-body:
+  - _progressbar.html
+---
+
+## Shiny is easy...
+
+## ...until it's not
+
+. . .
+
+Deployment is hard!
+
+::: incremental
+- Your code needs a server to run on
+- With the appropriate version of R or Python
+- With the right system dependencies and packages installed
+- With a copy of your app code and data
+:::
+
+## Our best attempts at simplifying deployment
+
+- [ShinyApps.io](https://shinyapps.io) for free or paid cloud hosting
+- [Posit Connect](https://posit.co/products/enterprise/connect/) for on-premises enterprise hosting
+
+. . .
+
+Excellent for businesses, or apps with light to moderate traffic.
+
+But expensive for hobbyists or freelancers with potentially high traffic.
+
+## Can we remove the R or Python server altogether?
+
+Some different approaches:
+
+::: incremental
+- **Send your app code and data to users, and have them run it locally.**  
+Awful install experience, problematic security implications.
+- **Rewrite your app in pure JavaScript.**  
+Painful development learning curve, no access to R and Python packages.
+- **Create an R/Python process _inside_ the browser, and run the app there.**  
+Simply impossible, until recently...
+:::
+
+
+
+
+
+# WebAssembly (wasm)
+
+## What is wasm?
+
+::: incremental
+- For years, browsers' only native tongue was JavaScript
+- Now, browsers all speak JavaScript _and_ wasm
+- JavaScript is designed for humans to write, wasm is designed for compilers to emit
+- Write code in C/C++, compile to wasm, and run it in the browser!
+:::
+
+## I was wrong about wasm!
+
+. . .
+
+"Their" reasoning:
+
+::: incremental
+- Shiny is written in R
+- R is written in C/C++
+- C/C++ can be compiled to wasm
+- Shiny can be compiled to wasm, QED
+:::
+
+. . .
+
+My response: "Well, _actually_..."
+
+## {background-image="images/iceberg-animation/‎iceberg-animation.‎001.jpeg" background-size="contain"}
+<!---
+## {background-image="images/iceberg-animation/‎iceberg-animation.‎002.jpeg" background-size="contain"}
+## {background-image="images/iceberg-animation/‎iceberg-animation.‎003.jpeg" background-size="contain"}
+## {background-image="images/iceberg-animation/‎iceberg-animation.‎004.jpeg" background-size="contain"}
+## {background-image="images/iceberg-animation/‎iceberg-animation.‎005.jpeg" background-size="contain"}
+## {background-image="images/iceberg-animation/‎iceberg-animation.‎006.jpeg" background-size="contain"}
+## {background-image="images/iceberg-animation/‎iceberg-animation.‎007.jpeg" background-size="contain"}
+## {background-image="images/iceberg-animation/‎iceberg-animation.‎008.jpeg" background-size="contain"} 
+--->
+## {background-image="images/iceberg-animation/‎iceberg-animation.‎009.jpeg" background-size="contain"}
+
+## Porting is even more difficult than it seems
+
+Some fairly basic computing capabilities are just not available in the browser!
+
+::: incremental
+- Cannot launch a process
+- Cannot open a network connection
+- Cannot perform synchronous I/O (e.g. fetch a web page)
+- Cannot handle interrupt signals (e.g. Ctrl-C)
+:::
+
+. . .
+
+wasm doesn't change these limitations, it just makes them hurt more.
+
+## {background-image="images/mountain-animation/‎mountain-animation.‎001.jpeg" background-size="contain"}
+## {background-image="images/mountain-animation/‎mountain-animation.‎002.jpeg" background-size="contain"}
+
+## Some people are just built different
+
+- Joe Cheng: "Stop suggesting we port everything to wasm! It's never going to work!"
+
+. . .
+
+(whoops)
+
+::: incremental
+- [Alon Zakai](https://www.linkedin.com/in/alonzakai/): "Let's build a compiler toolchain and computing platform that runs on wasm" → emscripten
+- [Michael Droettboom](https://www.linkedin.com/in/mdboom/): "Let's patch NumPy, Matplotlib, and Pandas to run on wasm" → Pyodide
+- [George Stagg](https://www.linkedin.com/in/george-w-stagg/) and [Lionel Henry](https://twitter.com/_lionelhenry): "Let's patch R and build a `<canvas>` graphics device to run on wasm" → WebR
+- [Winston Chang](https://www.linkedin.com/in/winstonchang1/): "Let's make Shiny run on wasm" → ShinyLive
+:::
+
+## July 2022: Shinylive for Python
+
+![](images/shinylive-shiny-deployment-model.png){width=60%}
+
+![](images/shinylive-shinylive-deployment-model.png){width=60%}
+
+## **Sept 2023:** Shinylive for R!!! {.confetti}
+
+![](images/shinylive-shiny-deployment-model-r.png){width=60%}
+
+![](images/shinylive-shinylive-deployment-model-r.png){width=60%}
+
+# How to use Shinylive
+
+## Several different options are available
+
+::: incremental
+* Convert
+* Fiddle
+* Include
+:::
+
+## Option 1: Convert
+
+{shinylive}: Convert local Shiny app to static HTML/CSS/JS/wasm
+
+(TODO: Diagram: app.R -> `> shinylive::export()` -> index.html + assets)
+(TODO: Diagram: app.py -> `$ shinylive export` -> index.html + assets)
+
+## Option 1: Convert
+
+Caveat: For browser security reasons, you can't just double-click index.html to run it locally. You need a real web server. Fortunately, both R and Python have one-liners to start a web server for a directory.
+
+<br>
+
+### Shiny for R:
+```r
+> shinylive::export(app_dir="myapp", output_dir="site")
+> httpuv::runStaticServer("site")
+```
+
+<br>
+
+### Shiny for Python:
+```python
+$ shinylive export myapp site
+$ cd site
+$ python -m http.server 8000
+```
+
+## Option 2: Fiddle
+
+Shinylive.io: Write and share Shiny apps directly in the browser
+
+1. Browse examples
+2. Create your own
+3. Share via URL
+4. Save to GitHub gist
+
+## Option 2: Fiddle
+
+:::: columns
+::: {.column width="75%"}
+![](images/shinylive.png){.border}
+:::
+::: {.column width="25%"}
+**Shiny for Python:**  
+[https://shinylive.io/py/](https://shinylive.io/py/)
+
+**Shiny for R:**  
+[https://shinylive.io/r/](https://shinylive.io/r/)
+:::
+::::
+
+
+# Not just cheaper
+
+## {background-image="images/IBM_7010.jpg" background-size="contain"}
+
+::: sr-only
+Mainframe computer
+:::
+
+::: attribution
+Photo credit: [Norsk Teknisk Museum](https://digitaltmuseum.org/011015240045/22-0-ibm-diverse-maskiner), CC BY-SA 4.0
+:::
+
+## {background-image="images/DEC_PDP-8-e.jpg" background-size="contain"}
+
+::: sr-only
+Minicomputer
+:::
+
+::: attribution
+Photo credit: Florian Schäffer, CC BY-SA 4.0, via Wikimedia Commons
+:::
+
+## {background-image="images/IBM_PC.jpg" background-size="contain"}
+
+::: sr-only
+IBM PC
+:::
+
+::: attribution
+Photo credit: <a href="https://unsplash.com/@bertsz?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">bert b</a> on <a href="https://unsplash.com/photos/Zd6PL6PSW5E?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+:::
+
+## {background-image="images/iphone.jpg" background-size="fill"}
+
+::: sr-only
+iPhone
+:::
+
+::: attribution
+Photo credit: <a href="https://unsplash.com/@cardmapr?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">CardMapr.nl</a> on <a href="https://unsplash.com/photos/tvzykmBf3r0?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+:::
+
+## {background-image="images/airtag.jpg" background-size="fill"}
+
+::: sr-only
+AirTag on keychain
+:::
+
+::: attribution
+Photo credit: <a href="https://unsplash.com/@eddiepipocas?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Eddie Pipocas</a> on <a href="https://unsplash.com/photos/wxQavhHf4J4?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+:::
+
+## Option 3: Include
+
+quarto-shinylive: Static Shiny apps as Quarto code chunks
+
+## New uses for Shiny
+
+- Shiny for Python tutorial is all shinylive
+- Shiny for Python function reference docs embed example apps
+- pkgdown sites for R could use Shiny apps to demonstrate package functionality
+
+## New uses for Shiny
+
+Your turn!
+
+::: incremental
+- Would your last presentation have been more compelling with some interactivity?
+- Would your blog posts be more powerful if they featured interactive apps?
+- Could your package's documentation benefit from Shiny apps?
+:::
+
+## Recap
+
+* **Convert**: Use the {shinylive} package to convert app.R/app.py to static HTML
+* **Fiddle**: Visit [https://shinylive.io/py/](https://shinylive.io/py/) or [https://shinylive.io/r/](https://shinylive.io/r/) to start writing and running Shiny apps in the browser
+* **Include**: Use quarto-shinylive to embed Shiny apps in Quarto documents, presentations, and websites
+
+
+## Limitations
+
+- Slower startup time, larger download size
+- Not all of CRAN or PyPI is available
+- Some functions just don't work (R: `system()` and `{future}`, Python: `multiprocessing`)
+- Can't connect directly to databases (but API calls may work)
+- Code/data is fully visible to users
+
+## Thank you!
+
+
+```{=html}
+<style>
+.border {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+}
+.attribution {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: auto;
+  height: auto;
+  font-size: 1.25rem;
+  background-color: white;
+  padding: 5px;
+  border: 2px solid #ccc;
+}
+.attribution p {
+  margin: 0;
+}
+.sr-only {
+  text-indent: -999999px;
+}
+pre code.sourceCode {
+  font-size: 2em;
+}
+</style>
+```
+<script src="js/tsparticles.confetti.bundle.min.js"></script>
+<script>
+setTimeout(() => {
+  Reveal.on("slidechanged", event => {
+    if (event.currentSlide.matches(".confetti")) {
+      const duration = 3 * 1000,
+        animationEnd = Date.now() + duration,
+        defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+      function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      const interval = setInterval(function() {
+        const timeLeft = animationEnd - Date.now();
+
+        if (timeLeft <= 0) {
+          return clearInterval(interval);
+        }
+
+        const particleCount = 50 * (timeLeft / duration);
+
+        // since particles fall down, start a bit higher than random
+        confetti(
+          Object.assign({}, defaults, {
+            particleCount,
+            origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+          })
+        );
+        confetti(
+          Object.assign({}, defaults, {
+            particleCount,
+            origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+          })
+        );
+      }, 250);    }
+  });
+}, 2000);
+</script>
