@@ -427,6 +427,9 @@ Your turn!
 
 ## Thank you!
 
+Slides and links to next steps:  
+https://github.com/jcheng5/posit-conf-2023-shinylive
+
 
 ```{=html}
 <style>

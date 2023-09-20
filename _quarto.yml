@@ -3,5 +3,8 @@ project:
   render:
     - "*.qmd"
     - "!shinylive_assets/"
+    - "!README.md"
+  resources:
+    - index.html
 execute:
   freeze: auto
