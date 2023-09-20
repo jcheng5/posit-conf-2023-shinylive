@@ -592,17 +592,17 @@ Simply impossible, until recently…</li>
 .profile {
   display: none;
 }
-[data-fragment='0'] .profile[data-with-fragment='0'],
-[data-fragment='1'] .profile[data-with-fragment='1'],
-[data-fragment='2'] .profile[data-with-fragment='2'],
-[data-fragment='3'] .profile[data-with-fragment='3'],
-[data-fragment='4'] .profile[data-with-fragment='4'],
-[data-fragment='5'] .profile[data-with-fragment='5'] {
+[data-fragment='0'] .profile[data-with-fragment~='0'],
+[data-fragment='1'] .profile[data-with-fragment~='1'],
+[data-fragment='2'] .profile[data-with-fragment~='2'],
+[data-fragment='3'] .profile[data-with-fragment~='3'],
+[data-fragment='4'] .profile[data-with-fragment~='4'],
+[data-fragment='5'] .profile[data-with-fragment~='5'] {
   display: inline-block;
 }
 </style>
-<div style="text-align: center;">
-<p><img data-src="images/people/alon-zakai.jpg" class="profile border" alt="Alon Zakai" data-with-fragment="0" width="250"> <img data-src="images/people/mike-droettboom.jpg" class="profile border" alt="Michael Droettboom" data-with-fragment="1" width="250"> <img data-src="images/people/winston-chang.jpg" class="profile border" alt="Winston Chang" data-with-fragment="2" width="250"> <img data-src="images/people/george-stagg.jpg" class="profile border" alt="George Stagg" data-with-fragment="3" width="250"> <img data-src="images/people/lionel-henry.png" class="profile border" alt="Lionel Henry" data-with-fragment="3" width="250"></p>
+<div class=".profiles">
+<p><img data-src="images/people/alon-zakai.jpg" class="profile border" alt="Alon Zakai" data-with-fragment="0 1 2 3" width="250"> <img data-src="images/people/mike-droettboom.jpg" class="profile border" alt="Michael Droettboom" data-with-fragment="1 2 3" width="250"> <img data-src="images/people/winston-chang.jpg" class="profile border" alt="Winston Chang" data-with-fragment="2 3" width="250"> <img data-src="images/people/george-stagg.jpg" class="profile border" alt="George Stagg" data-with-fragment="3" width="250"> <img data-src="images/people/lionel-henry.png" class="profile border" alt="Lionel Henry" data-with-fragment="3" width="250"></p>
 </div>
 </section>
 <section id="july-2022-announced-shinylive-for-python" class="slide level2">
@@ -724,7 +724,7 @@ Simply impossible, until recently…</li>
 <span id="cb4-7"><a href="#cb4-7"></a></span>
 <span id="cb4-8"><a href="#cb4-8"></a># Define UI for app that draws a histogram ----</span>
 <span id="cb4-9"><a href="#cb4-9"></a>ui &lt;- page_sidebar(theme = theme,</span>
-<span id="cb4-10"><a href="#cb4-10"></a>    sidebar = sidebar(</span>
+<span id="cb4-10"><a href="#cb4-10"></a>    sidebar = sidebar(open = "open",</span>
 <span id="cb4-11"><a href="#cb4-11"></a>        numericInput("n", "n", 20),</span>
 <span id="cb4-12"><a href="#cb4-12"></a>        checkboxInput("pause", "Pause", FALSE),</span>
 <span id="cb4-13"><a href="#cb4-13"></a>    ),</span>
@@ -734,25 +734,27 @@ Simply impossible, until recently…</li>
 <span id="cb4-17"><a href="#cb4-17"></a>server &lt;- function(input, output, session) {</span>
 <span id="cb4-18"><a href="#cb4-18"></a>    data &lt;- reactive({</span>
 <span id="cb4-19"><a href="#cb4-19"></a>        input$resample</span>
-<span id="cb4-20"><a href="#cb4-20"></a>        invalidateLater(1000)</span>
-<span id="cb4-21"><a href="#cb4-21"></a>        rnorm(input$n)</span>
-<span id="cb4-22"><a href="#cb4-22"></a>    })</span>
-<span id="cb4-23"><a href="#cb4-23"></a>    </span>
-<span id="cb4-24"><a href="#cb4-24"></a>    output$plot &lt;- renderPlot({</span>
-<span id="cb4-25"><a href="#cb4-25"></a>        hist(data(),</span>
-<span id="cb4-26"><a href="#cb4-26"></a>            breaks = 40,</span>
-<span id="cb4-27"><a href="#cb4-27"></a>            xlim = c(-2, 2),</span>
-<span id="cb4-28"><a href="#cb4-28"></a>            lty = "blank",</span>
-<span id="cb4-29"><a href="#cb4-29"></a>            xlab = "value"</span>
-<span id="cb4-30"><a href="#cb4-30"></a>        )</span>
-<span id="cb4-31"><a href="#cb4-31"></a>        lwd &lt;- 8</span>
-<span id="cb4-32"><a href="#cb4-32"></a>        abline(v=0, col="red", lwd=lwd, lty=2)</span>
-<span id="cb4-33"><a href="#cb4-33"></a>        abline(v=mean(data()), col="blue", lwd=lwd, lty=1)</span>
-<span id="cb4-34"><a href="#cb4-34"></a>    })</span>
-<span id="cb4-35"><a href="#cb4-35"></a>}</span>
-<span id="cb4-36"><a href="#cb4-36"></a>    </span>
-<span id="cb4-37"><a href="#cb4-37"></a># Create Shiny app ----</span>
-<span id="cb4-38"><a href="#cb4-38"></a>shinyApp(ui = ui, server = server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-20"><a href="#cb4-20"></a>        if (!isTRUE(input$pause)) {</span>
+<span id="cb4-21"><a href="#cb4-21"></a>          invalidateLater(1000)</span>
+<span id="cb4-22"><a href="#cb4-22"></a>        }</span>
+<span id="cb4-23"><a href="#cb4-23"></a>        rnorm(input$n)</span>
+<span id="cb4-24"><a href="#cb4-24"></a>    })</span>
+<span id="cb4-25"><a href="#cb4-25"></a>    </span>
+<span id="cb4-26"><a href="#cb4-26"></a>    output$plot &lt;- renderPlot({</span>
+<span id="cb4-27"><a href="#cb4-27"></a>        hist(data(),</span>
+<span id="cb4-28"><a href="#cb4-28"></a>            breaks = 40,</span>
+<span id="cb4-29"><a href="#cb4-29"></a>            xlim = c(-2, 2),</span>
+<span id="cb4-30"><a href="#cb4-30"></a>            lty = "blank",</span>
+<span id="cb4-31"><a href="#cb4-31"></a>            xlab = "value"</span>
+<span id="cb4-32"><a href="#cb4-32"></a>        )</span>
+<span id="cb4-33"><a href="#cb4-33"></a>        lwd &lt;- 8</span>
+<span id="cb4-34"><a href="#cb4-34"></a>        abline(v=0, col="red", lwd=lwd, lty=2)</span>
+<span id="cb4-35"><a href="#cb4-35"></a>        abline(v=mean(data()), col="blue", lwd=lwd, lty=1)</span>
+<span id="cb4-36"><a href="#cb4-36"></a>    })</span>
+<span id="cb4-37"><a href="#cb4-37"></a>}</span>
+<span id="cb4-38"><a href="#cb4-38"></a>    </span>
+<span id="cb4-39"><a href="#cb4-39"></a># Create Shiny app ----</span>
+<span id="cb4-40"><a href="#cb4-40"></a>shinyApp(ui = ui, server = server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section>
 <section id="not-just-cheaper" class="title-slide slide level1 center">
@@ -845,7 +847,10 @@ Simply impossible, until recently…</li>
 <section id="limitations" class="slide level2">
 <h2>Limitations</h2>
 <ul>
-<li>Slower startup time, larger download size</li>
+<li>Slower startup time, larger download size
+<ul>
+<li>Especially bad for R right now, fixes coming very soon</li>
+</ul></li>
 <li>Not all of CRAN or PyPI is available</li>
 <li>Some functions just don’t work (R: <code>system()</code> and <code>{future}</code>, Python: <code>multiprocessing</code>)</li>
 <li>Can’t connect directly to databases (but API calls may work)</li>
@@ -854,7 +859,10 @@ Simply impossible, until recently…</li>
 </section>
 <section id="thank-you" class="slide level2">
 <h2>Thank you!</h2>
-<style>
+<p>Copy of these slides, and links to next steps:<br>
+<a href="https://bit.ly/shinylive-2023">https://bit.ly/shinylive-2023</a></p>
+
+<img data-src="images/qrcode.png" style="position: absolute; right: 0;" alt="QR code to the same link as above" class="r-stretch"><style>
 .border {
   border: 2px solid #ccc;
   border-radius: 5px;
