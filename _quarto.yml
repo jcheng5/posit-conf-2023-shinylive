@@ -4,6 +4,7 @@ project:
     - "*.qmd"
     - "!shinylive_assets/"
     - "!README.md"
+    - "!renv"
   resources:
     - index.html
 execute:

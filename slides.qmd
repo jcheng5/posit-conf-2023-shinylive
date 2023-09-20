@@ -15,50 +15,24 @@ include-before-body:
   - _progressbar.html
 ---
 
-#
+# Let's talk about Shiny deployment
 
-## Shiny is easy...
-
-## ...until it's not
-
-. . .
-
-Deployment is hard!
-
-::: incremental
-- Your code needs a server to run on
-- With the appropriate version of R or Python
-- With the right system dependencies and packages installed
-- With a copy of your app code and data
-:::
-
-## Our best attempts at simplifying deployment
+## Lots of great options
 
 - [ShinyApps.io](https://shinyapps.io) for free or paid cloud hosting
 - [Posit Connect](https://posit.co/products/enterprise/connect/) for on-premises enterprise hosting
+- [Shiny Server](https://posit.co/products/open-source/shinyserver/) for on-premises open source hosting
+- [Hugging Face](https://shiny.posit.co/blog/posts/shiny-on-hugging-face/) for free or paid cloud hosting
+- [Heroku](https://www.heroku.com/), probably
+- ...and more
 
 . . .
 
-Excellent for businesses, or apps with light to moderate traffic.
+But all have tradeoffs between cost, scalability, and features.
 
-But expensive for hobbyists or freelancers with potentially high traffic.
+## Academics:
 
-## Can we remove the R or Python server altogether?
-
-Some different approaches:
-
-::: incremental
-- **Send your app code and data to users, and have them run it locally.**  
-Awful install experience, problematic security implications.
-- **Rewrite your app in pure JavaScript.**  
-Painful development learning curve, no access to R and Python packages.
-- **Create an R/Python process _inside_ the browser, and run the app there.**  
-Simply impossible, until recently...
-:::
-
-
-
-
+![](images/blewaway.gif){alt="Mike Wazowski saying 'Wouldn't it be easier if it all just blew away?'" style="width: 600px; display: block; margin: 2em auto;"}
 
 # WebAssembly (wasm)
 
@@ -115,8 +89,8 @@ Some fairly basic computing capabilities are just not available in the browser!
 
 wasm doesn't change these limitations, it just makes them hurt more.
 
-## {background-image="images/mountain-animation/‎mountain-animation.‎001.jpeg" background-size="contain"}
-## {background-image="images/mountain-animation/‎mountain-animation.‎002.jpeg" background-size="contain"}
+## {background-image="images/mountain-animation-bw/‎mountain-animation-bw.‎001.jpeg" background-size="contain"}
+## {background-image="images/mountain-animation-bw/‎mountain-animation-bw.‎002.jpeg" background-size="contain"}
 
 ## Some people are just built different
 
@@ -150,6 +124,9 @@ wasm doesn't change these limitations, it just makes them hurt more.
 ![](images/people/george-stagg.jpg){width=250 alt="George Stagg" .profile .border data-with-fragment=3}
 ![](images/people/lionel-henry.png){width=250 alt="Lionel Henry" .profile .border data-with-fragment=3}
 :::
+
+## {background-image="images/mountain-animation-bw/‎mountain-animation-bw.‎002.jpeg" background-size="contain"}
+## {background-image="images/mountain-animation/‎mountain-animation.‎002.jpeg" background-size="contain"}
 
 ## July 2022: Announced Shinylive for Python
 
@@ -397,16 +374,17 @@ pkgdown sites for R could use Shiny apps to demonstrate package functionality (h
 
 ## New uses for Shiny
 
-An R Consortium working group and the FDA are [exploring the possibility](https://rconsortium.github.io/submissions-pilot4/minutes/2023-08-04/) of WebR and Shinylive as a way to include reproducible analysis and apps in clinical study reports
+An R Consortium working group and the FDA are [exploring the possibility](https://rconsortium.github.io/submissions-pilot4/minutes/2023-08-04/) of WebR and Shinylive as a way to include reproducible reports and apps in clinical study reports.
 
 ## New uses for Shiny
 
 Your turn!
 
 ::: incremental
-- Could your next *presentation* have been more compelling with some interactivity?
-- Could your *lecture notes* lead to deeper understanding if they had interactive examples?
-- Would your *blog posts* be more powerful if they featured interactive apps?
+- Could your next **presentation** be more compelling with some interactivity?
+- Could your **lecture notes** lead to deeper understanding if they had interactive examples?
+- Would your **blog posts** be more powerful if they featured interactive apps?
+- Could you **bewilder** your students with a random game of [Hangman](https://shinylive.io/py/editor/#code=NobwRAdghgtgpmAXGKAHVA6VBPMAaMAYwHsIAXOcpMAMwCdiYACAZwAsBLCbJjmVYnTJMAgujxM6lACZw6EgK4cJUqITIcAbnAA6EPgKGSoEaYz0HBwlmTpcA5nvqMmbE-ZgmaCiIV78rV3dPCD0ACREAOQBxAFkogAUASQBhAGUmAF4mYAByfL0mJgBqAFpy4sKmAB8imqq6+ohGouqGurbmls7M3r6+-NyJQaqyiqra1qqAeQ72qa7Gzpam-rXB4YKusdLKrsmmotmF1rnFs5WetYH8zdzR8t2Ji6Zjw4B6A+Xu+dXr3o2TBG20ee1OJ1eF0+Oh0EKWvyu-0BwKKOzBNReb2W0NhH3h5wW-wBtyBW1RoOeEKxhRxJ3eTBhcLORMygwAunpOdB0AB9JRZJhKLBQexwHk0AA2SmkAAp2kKuKgFGQeWoNKQeQAjZVkUhysD2Yg6fAMsAJAAyIgAmkwIjF4pFjQBKPDyjgYYjKpUqigADxV2jomqgGhg+pCztd5yFnrI3p5foDcmDof1ZH9kYaeidXL0shorDkgZliuVElj3okLDgLBYHFITsQ7QA7oJpALVOotHAMAA1KBSuD653tCVwMgUOgsHn2BQ16vt7KdjTaPsDucy4BsnPnNwQewduBq7trwcy0oARh3jRYxAl2kXkiPXdX-bPADEB9Xr3VpBw4I+y4nm+G6fhK37tO0AACQGrgAojQNBwOoMo-kUMHPiuPZwNo5AlhA3oYIaaFMPmTA8qhTYEnUrZ0NILACsAxpJLkzDaiw2AYMaEjGlacAShKxDNkwABCdiEAA1kwABKxBQNI3GmkkTDmsQ2hMFanqKca0yagAVshwjTHYlAUO2CQMPYdCwDADjGhy1FFLR0gYNWZAytZpiMBghBsMQHCEEOzksE6JGNGOE5yNOs7zgBrnjpu26-EUe72PF7kAAxhXUQpSDAalikoMrVmO6iCAKxp-poiBuCwMoAHxMAAxBFk45mALrJYK7pcNWQh8hwcqOS0CoEcqCZwP6+qtXI2lgOa46TkwAAqxBMNEc61pmw03vxhmCJkxpNemZDcV1jTNmwchwIdKA0JOcGmGdw07tBsE9ghSEoSRGHHquOGmfhhEzXQJFkRRjZdRKAog9Fm0LkRCXZUUHAFqWZAYCDqG8M0Nh2PuGBQCwhAcBwPKCc2ciEETcBMOV6OY4tcjY1wrC2A4hPE6TfLoFTNNUSsKwSoTvOmEDyqM5FdCoRgCi89LoXnXUsMzvDcVuTKErIy0qM48DTMK7L8vYxAxDCKzzmI+5TpG6gzOQztgtsAKqVW6hSsrM7xTZBeHstK7GtsNrgtMKg+PuUHfuNGHXDucajylCOjsrDHeFjhAMp2nEiSpGkivJzrBbO-V2Tp5nUTZ5EyTpE6l4CyHDdFLlcD5doA3FXtZV0BVYBVTVRMNc1IPtZ1Bch6NfUqkVUeN91WD6la0wAKoqdMaRwQAhNts874WpW6t32RHSdz277Pl3XT3UD3XIj0KWAM8rMHZ8MqEb8h1BFbKl1GGmHIGCJi6mREIlE-ZSDIAoOgGcs4OmrmkYArtRTWySgXH+X9TrDV-rIOgADJoYJDmRE6oCC7CWyJbJB7sC6xhdsEEwMpUBsGstWAUzYJAqxirWACMMDZw1ii5Ch+cd662ob0JgzZ65n2bq3Qqg0Sr7UPqaPutVB4tQNiPKML8569TkFPQaj8RrulQAvZeTAADq0xIhbw6hozRdQ5Fdx7sdDM+B9EXSulIK+N86B32NPo5+RR+LVgkbvIUctpAhjFImaaBtFKaHXLTI+D8OpgPHJAjOsZXpvzQKgAUYgjHZIGlWIscgdxgAAL54HANAeA1BUohG8L4LAuACAkHIKZagZE6l0IYUwuAbCeGqz4Q7RoIjTS+PODQemONjD7iHGXHpNNQrBKEQWBZ1ZgAcDZNMpiYBTQ8TAPcE08c5pcSOS4sAbJlkv2od7UOjCaYbIcpo-ius1lwEebbe20z2Fq2kFcs+NzshvMefowJcB-m70BaaHk4zGjgLSTKDJehylsiAA) in the middle of their homework?
 :::
 
 ## Recap
