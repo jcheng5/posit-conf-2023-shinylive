@@ -460,52 +460,28 @@ Joe Cheng
 
 </section>
 <section>
-<section id="section" class="title-slide slide level1 center">
-<h1></h1>
+<section id="lets-talk-about-shiny-deployment" class="title-slide slide level1 center">
+<h1>Let’s talk about Shiny deployment</h1>
 
 </section>
-<section id="shiny-is-easy" class="slide level2">
-<h2>Shiny is easy…</h2>
-</section>
-<section id="until-its-not" class="slide level2">
-<h2>…until it’s not</h2>
-<div class="fragment">
-<p>Deployment is hard!</p>
-<div>
-<ul>
-<li class="fragment">Your code needs a server to run on</li>
-<li class="fragment">With the appropriate version of R or Python</li>
-<li class="fragment">With the right system dependencies and packages installed</li>
-<li class="fragment">With a copy of your app code and data</li>
-</ul>
-</div>
-</div>
-</section>
-<section id="our-best-attempts-at-simplifying-deployment" class="slide level2">
-<h2>Our best attempts at simplifying deployment</h2>
+<section id="lots-of-great-options" class="slide level2">
+<h2>Lots of great options</h2>
 <ul>
 <li><a href="https://shinyapps.io">ShinyApps.io</a> for free or paid cloud hosting</li>
 <li><a href="https://posit.co/products/enterprise/connect/">Posit Connect</a> for on-premises enterprise hosting</li>
+<li><a href="https://posit.co/products/open-source/shinyserver/">Shiny Server</a> for on-premises open source hosting</li>
+<li><a href="https://shiny.posit.co/blog/posts/shiny-on-hugging-face/">Hugging Face</a> for free or paid cloud hosting</li>
+<li><a href="https://www.heroku.com/">Heroku</a>, probably</li>
+<li>…and more</li>
 </ul>
 <div class="fragment">
-<p>Excellent for businesses, or apps with light to moderate traffic.</p>
-<p>But expensive for hobbyists or freelancers with potentially high traffic.</p>
+<p>But all have tradeoffs between cost, scalability, and features.</p>
 </div>
 </section>
-<section id="can-we-remove-the-r-or-python-server-altogether" class="slide level2">
-<h2>Can we remove the R or Python server altogether?</h2>
-<p>Some different approaches:</p>
-<div>
-<ul>
-<li class="fragment"><strong>Send your app code and data to users, and have them run it locally.</strong><br>
-Awful install experience, problematic security implications.</li>
-<li class="fragment"><strong>Rewrite your app in pure JavaScript.</strong><br>
-Painful development learning curve, no access to R and Python packages.</li>
-<li class="fragment"><strong>Create an R/Python process <em>inside</em> the browser, and run the app there.</strong><br>
-Simply impossible, until recently…</li>
-</ul>
-</div>
-</section></section>
+<section id="academics" class="slide level2">
+<h2>Academics:</h2>
+
+<img data-src="images/blewaway.gif" style="width: 600px; display: block; margin: 2em auto;" alt="Mike Wazowski saying 'Wouldn't it be easier if it all just blew away?'" class="r-stretch"></section></section>
 <section>
 <section id="webassembly-wasm" class="title-slide slide level1 center">
 <h1>WebAssembly (wasm)</h1>
@@ -539,7 +515,7 @@ Simply impossible, until recently…</li>
 <p>My response: “Well, <em>actually</em>…”</p>
 </div>
 </section>
-<section id="section-1" class="slide level2" data-background-image="images/iceberg-animation/‎iceberg-animation.‎001.jpeg" data-background-size="contain">
+<section id="section" class="slide level2" data-background-image="images/iceberg-animation/‎iceberg-animation.‎001.jpeg" data-background-size="contain">
 <h2></h2>
 <!---
 ## {background-image="images/iceberg-animation/‎iceberg-animation.‎002.jpeg" background-size="contain"}
@@ -551,7 +527,7 @@ Simply impossible, until recently…</li>
 ## {background-image="images/iceberg-animation/‎iceberg-animation.‎008.jpeg" background-size="contain"} 
 --->
 </section>
-<section id="section-2" class="slide level2" data-background-image="images/iceberg-animation/‎iceberg-animation.‎009.jpeg" data-background-size="contain">
+<section id="section-1" class="slide level2" data-background-image="images/iceberg-animation/‎iceberg-animation.‎009.jpeg" data-background-size="contain">
 <h2></h2>
 </section>
 <section id="porting-is-even-more-difficult-than-it-seems" class="slide level2">
@@ -569,10 +545,10 @@ Simply impossible, until recently…</li>
 <p>wasm doesn’t change these limitations, it just makes them hurt more.</p>
 </div>
 </section>
-<section id="section-3" class="slide level2" data-background-image="images/mountain-animation/‎mountain-animation.‎001.jpeg" data-background-size="contain">
+<section id="section-2" class="slide level2" data-background-image="images/mountain-animation-bw/‎mountain-animation-bw.‎001.jpeg" data-background-size="contain">
 <h2></h2>
 </section>
-<section id="section-4" class="slide level2" data-background-image="images/mountain-animation/‎mountain-animation.‎002.jpeg" data-background-size="contain">
+<section id="section-3" class="slide level2" data-background-image="images/mountain-animation-bw/‎mountain-animation-bw.‎002.jpeg" data-background-size="contain">
 <h2></h2>
 </section>
 <section id="some-people-are-just-built-different" class="slide level2">
@@ -604,6 +580,12 @@ Simply impossible, until recently…</li>
 <div class=".profiles">
 <p><img data-src="images/people/alon-zakai.jpg" class="profile border" alt="Alon Zakai" data-with-fragment="0 1 2 3" width="250"> <img data-src="images/people/mike-droettboom.jpg" class="profile border" alt="Michael Droettboom" data-with-fragment="1 2 3" width="250"> <img data-src="images/people/winston-chang.jpg" class="profile border" alt="Winston Chang" data-with-fragment="2 3" width="250"> <img data-src="images/people/george-stagg.jpg" class="profile border" alt="George Stagg" data-with-fragment="3" width="250"> <img data-src="images/people/lionel-henry.png" class="profile border" alt="Lionel Henry" data-with-fragment="3" width="250"></p>
 </div>
+</section>
+<section id="section-4" class="slide level2" data-background-image="images/mountain-animation-bw/‎mountain-animation-bw.‎002.jpeg" data-background-size="contain">
+<h2></h2>
+</section>
+<section id="section-5" class="slide level2" data-background-image="images/mountain-animation/‎mountain-animation.‎002.jpeg" data-background-size="contain">
+<h2></h2>
 </section>
 <section id="july-2022-announced-shinylive-for-python" class="slide level2">
 <h2>July 2022: Announced Shinylive for Python</h2>
@@ -761,7 +743,7 @@ Simply impossible, until recently…</li>
 <h1>Not just cheaper</h1>
 
 </section>
-<section id="section-5" class="slide level2" data-background-image="images/IBM_7010.jpg" data-background-size="contain">
+<section id="section-6" class="slide level2" data-background-image="images/IBM_7010.jpg" data-background-size="contain">
 <h2></h2>
 <div class="sr-only">
 <p>Mainframe computer</p>
@@ -770,7 +752,7 @@ Simply impossible, until recently…</li>
 <p>Photo credit: <a href="https://digitaltmuseum.org/011015240045/22-0-ibm-diverse-maskiner">Norsk Teknisk Museum</a>, CC BY-SA 4.0</p>
 </div>
 </section>
-<section id="section-6" class="slide level2" data-background-image="images/DEC_PDP-8-e.jpg" data-background-size="contain">
+<section id="section-7" class="slide level2" data-background-image="images/DEC_PDP-8-e.jpg" data-background-size="contain">
 <h2></h2>
 <div class="sr-only">
 <p>Minicomputer</p>
@@ -779,7 +761,7 @@ Simply impossible, until recently…</li>
 <p>Photo credit: Florian Schäffer, CC BY-SA 4.0, via Wikimedia Commons</p>
 </div>
 </section>
-<section id="section-7" class="slide level2" data-background-image="images/IBM_PC.jpg" data-background-size="contain">
+<section id="section-8" class="slide level2" data-background-image="images/IBM_PC.jpg" data-background-size="contain">
 <h2></h2>
 <div class="sr-only">
 <p>IBM PC</p>
@@ -788,7 +770,7 @@ Simply impossible, until recently…</li>
 <p>Photo credit: <a href="https://unsplash.com/@bertsz?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">bert b</a> on <a href="https://unsplash.com/photos/Zd6PL6PSW5E?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p>
 </div>
 </section>
-<section id="section-8" class="slide level2" data-background-image="images/iphone.jpg" data-background-size="fill">
+<section id="section-9" class="slide level2" data-background-image="images/iphone.jpg" data-background-size="fill">
 <h2></h2>
 <div class="sr-only">
 <p>iPhone</p>
@@ -797,7 +779,7 @@ Simply impossible, until recently…</li>
 <p>Photo credit: <a href="https://unsplash.com/@cardmapr?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">CardMapr.nl</a> on <a href="https://unsplash.com/photos/tvzykmBf3r0?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p>
 </div>
 </section>
-<section id="section-9" class="slide level2" data-background-image="images/airtag.jpg" data-background-size="fill">
+<section id="section-10" class="slide level2" data-background-image="images/airtag.jpg" data-background-size="fill">
 <h2></h2>
 <div class="sr-only">
 <p>AirTag on keychain</p>
@@ -823,16 +805,17 @@ Simply impossible, until recently…</li>
 </section>
 <section id="new-uses-for-shiny-3" class="slide level2">
 <h2>New uses for Shiny</h2>
-<p>An R Consortium working group and the FDA are <a href="https://rconsortium.github.io/submissions-pilot4/minutes/2023-08-04/">exploring the possibility</a> of WebR and Shinylive as a way to include reproducible analysis and apps in clinical study reports</p>
+<p>An R Consortium working group and the FDA are <a href="https://rconsortium.github.io/submissions-pilot4/minutes/2023-08-04/">exploring the possibility</a> of WebR and Shinylive as a way to include reproducible reports and apps in clinical study reports.</p>
 </section>
 <section id="new-uses-for-shiny-4" class="slide level2">
 <h2>New uses for Shiny</h2>
 <p>Your turn!</p>
 <div>
 <ul>
-<li class="fragment">Could your next <em>presentation</em> have been more compelling with some interactivity?</li>
-<li class="fragment">Could your <em>lecture notes</em> lead to deeper understanding if they had interactive examples?</li>
-<li class="fragment">Would your <em>blog posts</em> be more powerful if they featured interactive apps?</li>
+<li class="fragment">Could your next <strong>presentation</strong> be more compelling with some interactivity?</li>
+<li class="fragment">Could your <strong>lecture notes</strong> lead to deeper understanding if they had interactive examples?</li>
+<li class="fragment">Would your <strong>blog posts</strong> be more powerful if they featured interactive apps?</li>
+<li class="fragment">Could you <strong>bewilder</strong> your students with a random game of <a href="https://shinylive.io/py/editor/#code=NobwRAdghgtgpmAXGKAHVA6VBPMAaMAYwHsIAXOcpMAMwCdiYACAZwAsBLCbJjmVYnTJMAgujxM6lACZw6EgK4cJUqITIcAbnAA6EPgKGSoEaYz0HBwlmTpcA5nvqMmbE-ZgmaCiIV78rV3dPCD0ACREAOQBxAFkogAUASQBhAGUmAF4mYAByfL0mJgBqAFpy4sKmAB8imqq6+ohGouqGurbmls7M3r6+-NyJQaqyiqra1qqAeQ72qa7Gzpam-rXB4YKusdLKrsmmotmF1rnFs5WetYH8zdzR8t2Ji6Zjw4B6A+Xu+dXr3o2TBG20ee1OJ1eF0+Oh0EKWvyu-0BwKKOzBNReb2W0NhH3h5wW-wBtyBW1RoOeEKxhRxJ3eTBhcLORMygwAunpOdB0AB9JRZJhKLBQexwHk0AA2SmkAAp2kKuKgFGQeWoNKQeQAjZVkUhysD2Yg6fAMsAJAAyIgAmkwIjF4pFjQBKPDyjgYYjKpUqigADxV2jomqgGhg+pCztd5yFnrI3p5foDcmDof1ZH9kYaeidXL0shorDkgZliuVElj3okLDgLBYHFITsQ7QA7oJpALVOotHAMAA1KBSuD653tCVwMgUOgsHn2BQ16vt7KdjTaPsDucy4BsnPnNwQewduBq7trwcy0oARh3jRYxAl2kXkiPXdX-bPADEB9Xr3VpBw4I+y4nm+G6fhK37tO0AACQGrgAojQNBwOoMo-kUMHPiuPZwNo5AlhA3oYIaaFMPmTA8qhTYEnUrZ0NILACsAxpJLkzDaiw2AYMaEjGlacAShKxDNkwABCdiEAA1kwABKxBQNI3GmkkTDmsQ2hMFanqKca0yagAVshwjTHYlAUO2CQMPYdCwDADjGhy1FFLR0gYNWZAytZpiMBghBsMQHCEEOzksE6JGNGOE5yNOs7zgBrnjpu26-EUe72PF7kAAxhXUQpSDAalikoMrVmO6iCAKxp-poiBuCwMoAHxMAAxBFk45mALrJYK7pcNWQh8hwcqOS0CoEcqCZwP6+qtXI2lgOa46TkwAAqxBMNEc61pmw03vxhmCJkxpNemZDcV1jTNmwchwIdKA0JOcGmGdw07tBsE9ghSEoSRGHHquOGmfhhEzXQJFkRRjZdRKAog9Fm0LkRCXZUUHAFqWZAYCDqG8M0Nh2PuGBQCwhAcBwPKCc2ciEETcBMOV6OY4tcjY1wrC2A4hPE6TfLoFTNNUSsKwSoTvOmEDyqM5FdCoRgCi89LoXnXUsMzvDcVuTKErIy0qM48DTMK7L8vYxAxDCKzzmI+5TpG6gzOQztgtsAKqVW6hSsrM7xTZBeHstK7GtsNrgtMKg+PuUHfuNGHXDucajylCOjsrDHeFjhAMp2nEiSpGkivJzrBbO-V2Tp5nUTZ5EyTpE6l4CyHDdFLlcD5doA3FXtZV0BVYBVTVRMNc1IPtZ1Bch6NfUqkVUeN91WD6la0wAKoqdMaRwQAhNts874WpW6t32RHSdz277Pl3XT3UD3XIj0KWAM8rMHZ8MqEb8h1BFbKl1GGmHIGCJi6mREIlE-ZSDIAoOgGcs4OmrmkYArtRTWySgXH+X9TrDV-rIOgADJoYJDmRE6oCC7CWyJbJB7sC6xhdsEEwMpUBsGstWAUzYJAqxirWACMMDZw1ii5Ch+cd662ob0JgzZ65n2bq3Qqg0Sr7UPqaPutVB4tQNiPKML8569TkFPQaj8RrulQAvZeTAADq0xIhbw6hozRdQ5Fdx7sdDM+B9EXSulIK+N86B32NPo5+RR+LVgkbvIUctpAhjFImaaBtFKaHXLTI+D8OpgPHJAjOsZXpvzQKgAUYgjHZIGlWIscgdxgAAL54HANAeA1BUohG8L4LAuACAkHIKZagZE6l0IYUwuAbCeGqz4Q7RoIjTS+PODQemONjD7iHGXHpNNQrBKEQWBZ1ZgAcDZNMpiYBTQ8TAPcE08c5pcSOS4sAbJlkv2od7UOjCaYbIcpo-ius1lwEebbe20z2Fq2kFcs+NzshvMefowJcB-m70BaaHk4zGjgLSTKDJehylsiAA">Hangman</a> in the middle of their homework?</li>
 </ul>
 </div>
 </section>
