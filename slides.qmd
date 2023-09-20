@@ -427,9 +427,10 @@ Your turn!
 
 ## Thank you!
 
-Slides and links to next steps:  
-https://github.com/jcheng5/posit-conf-2023-shinylive
+Copy of these slides, and links to next steps:  
+[https://bit.ly/shinylive-2023](https://bit.ly/shinylive-2023)
 
+![](images/qrcode.png){alt="QR code to the same link as above" style="position: absolute; right: 0;"}
 
 ```{=html}
 <style>
