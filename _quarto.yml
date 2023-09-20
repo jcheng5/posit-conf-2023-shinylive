@@ -1,0 +1,7 @@
+project:
+  output-dir: _output
+  render:
+    - "*.qmd"
+    - "!shinylive_assets/"
+execute:
+  freeze: auto
